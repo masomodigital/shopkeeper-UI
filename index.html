@@ -104,7 +104,6 @@
       <div class="topbar" id="welcomeText">Welcome, </div>
       <div id="info" class="info">Loading details...</div>
 
-      <button onclick="buyFloat()">Buy Float (Coming Soon)</button>
       <button onclick="window.open('https://masomodigital.github.io/shopkeeper-buy-bulk-airtime/', '_blank')">
         Buy Bulk Discounted Airtime
       </button>
@@ -156,12 +155,10 @@
               <p><strong>Airtime Float Balance:</strong> ${u.float}</p>
             `;
           }, 800);
-
         } else {
           msg.style.color = "red";
           msg.textContent = data.message;
         }
-
       } catch (err) {
         msg.style.color = "red";
         msg.textContent = "Error connecting to server.";
@@ -177,14 +174,10 @@
       document.getElementById("message").textContent = "";
     }
 
-    function buyFloat() {
-      alert("Float purchase feature coming soon!");
-    }
-
     // Placeholder for Sell Airtime link
     document.getElementById('sell-airtime-btn').onclick = function() {
-      const url = "YOUR_SELL_AIRTIME_LINK_HERE"; // insert link here
-      if (url && url !== "YOUR_SELL_AIRTIME_LINK_HERE") {
+      const url = "https://masomodigital.github.io/shopkeeper-sell-airtime/"; // insert actual link
+      if (url) {
         window.open(url, "_blank");
       } else {
         alert("Sell Airtime to Customer link not yet set.");
