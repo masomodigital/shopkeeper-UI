@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Masomo Airtime - Shopkeeper Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+    }
+    h2 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #1e40af; }
+    .msg {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+    #dashboard {
+      display: none;
+    }
+    .info {
+      background: #f9fafb;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .info p { margin: 6px 0; font-size: 15px; }
+    .info strong { color: #1e3a8a; }
+
+    .topbar {
+      background: #2563eb;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- LOGIN SECTION -->
+    <div id="login-section">
+      <h2>Shopkeeper Login</h2>
+      <input type="text" id="nid" placeholder="Enter National ID">
+      <input type="password" id="password" placeholder="Enter Password">
+      <button onclick="login()">Login</button>
+      <div id="message" class="msg"></div>
+    </div>
+
+    <!-- DASHBOARD SECTION -->
+    <div id="dashboard">
+      <div class="topbar" id="welcomeText">Welcome, </div>
+      <div id="info" class="info">Loading details...</div>
+      <button onclick="buyFloat()">Buy Float (Coming Soon)</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const WORKER_URL = "https://misty-math-ade8.ev-dmaundu.workers.dev/";
+
+    async function login() {
+      const nid = document.getElementById("nid").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("message");
+
+      if (!nid || !password) {
+        msg.style.color = "red";
+        msg.textContent = "Please enter both ID and Password.";
+        return;
+      }
+
+      msg.style.color = "#2563eb";
+      msg.textContent = "Verifying...";
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "login", nid, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          msg.style.color = "green";
+          msg.textContent = "Login successful!";
+
+          setTimeout(() => {
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            const u = data.user;
+            document.getElementById("welcomeText").textContent = `Welcome, ${u.name}`;
+            document.getElementById("info").innerHTML = `
+              <p><strong>Name:</strong> ${u.name}</p>
+              <p><strong>Phone:</strong> 0${u.phone}</p>
+              <p><strong>SMS Credits:</strong> ${u.credits}</p>
+              <p><strong>Airtime Float Balance:</strong> ${u.float}</p>
+            `;
+          }, 800);
+
+        } else {
+          msg.style.color = "red";
+          msg.textContent = data.message;
+        }
+
+      } catch (err) {
+        msg.style.color = "red";
+        msg.textContent = "Error connecting to server.";
+        console.error(err);
+      }
+    }
+
+    function logout() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("login-section").style.display = "block";
+      document.getElementById("nid").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("message").textContent = "";
+    }
+
+    function buyFloat() {
+      alert("Float purchase feature coming soon!");
+    }
+  </script>
+</body>
+</html>
