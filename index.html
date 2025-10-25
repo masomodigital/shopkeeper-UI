@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Masomo Airtime - Shopkeeper Login</title>
+  <title>Masomo Airtime - Shopkeeper Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -103,7 +103,13 @@
     <div id="dashboard">
       <div class="topbar" id="welcomeText">Welcome, </div>
       <div id="info" class="info">Loading details...</div>
+
       <button onclick="buyFloat()">Buy Float (Coming Soon)</button>
+      <button onclick="window.open('https://masomodigital.github.io/shopkeeper-buy-bulk-airtime/', '_blank')">
+        Buy Bulk Discounted Airtime
+      </button>
+      <button id="sell-airtime-btn">Sell Airtime to Customer</button>
+
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </div>
@@ -174,6 +180,16 @@
     function buyFloat() {
       alert("Float purchase feature coming soon!");
     }
+
+    // Placeholder for Sell Airtime link
+    document.getElementById('sell-airtime-btn').onclick = function() {
+      const url = "YOUR_SELL_AIRTIME_LINK_HERE"; // insert link here
+      if (url && url !== "YOUR_SELL_AIRTIME_LINK_HERE") {
+        window.open(url, "_blank");
+      } else {
+        alert("Sell Airtime to Customer link not yet set.");
+      }
+    };
   </script>
 </body>
 </html>
