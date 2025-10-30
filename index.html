@@ -86,6 +86,24 @@
     .logout-btn:hover {
       background: #dc2626;
     }
+
+    /* New styling for telco logos */
+    .telco-logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* space between logos */
+      margin-bottom: 20px;
+    }
+    .telco-logos img {
+      width: 60px;  /* same size */
+      height: 60px; /* same size */
+      object-fit: contain;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .telco-logos img:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -94,18 +112,18 @@
     <div id="login-section">
       <h2>MASOMO AIRTIME BUSINESS</h2>
 
-      <!-- TELCO LIST -->
+      <!-- TELCO LIST AS LOGOS -->
       <h4 style="text-align: center; font-size: 16px;">
         Make Money Selling HIGH-PROFIT Airtime For All Telcos! Airtime is delivered instantly to phone number.
       </h4>
       <div style="text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 15px;">
         COMMISSION CUT-OFF <span style="color: red; font-size: 18px;">5%</span>
       </div>
-      <ul style="list-style-position: inside; padding: 0; margin: 0 auto 20px; font-size: 14px; text-align: center;">
-        <li style="color: green; font-weight: 600;">Safaricom</li>
-        <li style="color: red; font-weight: 600;">Airtel</li>
-        <li style="color: skyblue; font-weight: 600;">Telkom</li>
-      </ul>
+      <div class="telco-logos">
+        <img src="https://i.imgur.com/RTx4BQ8.png" alt="Safaricom Logo" title="Safaricom">
+        <img src="https://i.imgur.com/TI4Iy9R.png" alt="Airtel Logo" title="Airtel">
+        <img src="https://i.imgur.com/YtPv6hx.png" alt="Telkom Logo" title="Telkom">
+      </div>
 
       <!-- LOGIN FORM -->
       <input type="text" id="nid" placeholder="Enter National ID" />
