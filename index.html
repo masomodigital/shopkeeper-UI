@@ -141,8 +141,8 @@
 <!-- Advertisement Message -->
 <div style="text-align:center; margin-top:20px;">
   <p style="font-size:18px; font-weight:bold; color:#2a5d84; line-height:1.5; margin-bottom:15px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;">
-    <!-- Megaphone SVG icon at start -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2a5d84" viewBox="0 0 24 24">
+    <!-- Animated green megaphone SVG icon at start -->
+    <svg class="bounce-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green" viewBox="0 0 24 24">
       <path d="M3 10v4h2l4 5v-14l-4 5h-2zm16.5 2c0-1.21-.7-2.27-1.72-2.75l-2.03-.68v6.86l2.03-.68c1.02-.34 1.72-1.43 1.72-2.75z"/>
     </svg>
     As you sell airtime, we help you advertise your business to reach more customers and make more sales!!
@@ -157,6 +157,24 @@
     ADVERTISE YOUR BUSINESS FOR FREE NOW
   </a>
 </div>
+
+<style>
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-6px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .bounce-icon {
+    animation: bounce 2s infinite;
+  }
+</style>
 
 
       <div id="message" class="msg"></div>
